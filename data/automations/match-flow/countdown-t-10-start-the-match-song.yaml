@@ -1,0 +1,19 @@
+folder:
+- Match flow
+alias: 'Countdown T-10: start the match song'
+enabled: false
+trigger_yaml: |
+  - platform: timer_milestone
+    tag: fieldCountdown
+    remaining: 00:00:10
+condition_yaml: null
+action_yaml: |
+  - service: spotify.set_volume
+    target: spotify.avi_mac
+    data:
+      volume: 100
+  - service: spotify.play_track
+    target: spotify.avi_mac
+    data:
+      track_uri: spotify:track:TODO_MATCH_TRACK
+      start_time_s: 0

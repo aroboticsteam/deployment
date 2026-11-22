@@ -1,0 +1,16 @@
+folder:
+- Finals
+alias: 'Finals: gold look when a finals match is queued'
+enabled: false
+trigger_yaml: |
+  - platform: state
+    entity_id: vex_tm.main
+    event_type: fieldMatchAssigned
+    match_name: F*
+condition_yaml: null
+action_yaml: |
+  - service: wled.set_preset
+    target_tag: fieldLights
+    target_filter: '{{ (''field'' ~ trigger.payload.fieldID) in target.tags }}'
+    data:
+      preset: 7

@@ -1,0 +1,15 @@
+folder:
+- Display
+alias: 'In match: OBS back to the match scene'
+enabled: false
+trigger_yaml: |
+  - platform: state
+    entity_id: vex_tm.main
+    event_type: audienceDisplayChanged
+condition_yaml: |
+  - '{{ trigger.payload.display == ''IN_MATCH'' }}'
+action_yaml: |
+  - service: obs.switch_scene
+    target: obs.main
+    data:
+      scene_name: Match

@@ -1,0 +1,14 @@
+folder:
+- Match flow
+alias: 'Match start: ATEM program to the field'
+enabled: false
+trigger_yaml: |
+  - platform: state
+    entity_id: vex_tm.main
+    event_type: matchStarted
+condition_yaml: null
+action_yaml: |
+  - service: atem.switch_input
+    target: atem.main
+    data:
+      input_index: '{{ {1: 1, 2: 2, 3: 3}[trigger.payload.fieldID | int] }}'

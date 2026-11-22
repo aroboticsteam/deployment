@@ -1,0 +1,14 @@
+folder:
+- Match flow
+alias: 'Match end: camera red (PTZ)'
+enabled: true
+trigger_yaml: |
+  - platform: state
+    entity_id: vex_tm.main
+    event_type: matchStopped
+condition_yaml: ''
+action_yaml: |
+  - service: ptz.recall_preset
+    target: ptz.birddog
+    data:
+      preset: "{{ (states('vex_tm.main', 'current_field') | int) + 5 }}"

@@ -1,4 +1,5 @@
-folder: []
+folder:
+- Match flow
 alias: 'Match start: start the recording'
 enabled: true
 trigger_yaml: |

@@ -1,0 +1,14 @@
+folder:
+- Lighting
+alias: 'Match start: stage lights to the match look'
+enabled: true
+trigger_yaml: |
+  - platform: state
+    entity_id: vex_tm.main
+    event_type: matchStarted
+condition_yaml: null
+action_yaml: |
+  - service: zeros.set_preset
+    target: zeros.main
+    data:
+      preset_name: Match
