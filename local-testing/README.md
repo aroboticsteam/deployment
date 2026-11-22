@@ -22,7 +22,7 @@ docker compose -f compose.yml -f local-testing/docker-compose.proxy.yml up -d
 users there; the template's header shows how to hash a password.
 
 That also brings up `compose.yml`'s `app` service (the full stack built
-from this repo's `Dockerfile`), along with its `migrate` and `bucket-init`
+from the published `vex-tm-tools` backend image), along with its `migrate` and `bucket-init`
 one-shot dependencies — Postgres migrations and MinIO bucket creation both
 happen automatically, no manual `alembic upgrade head` or MinIO console
 click-through needed on a clean `docker compose down -v`.
