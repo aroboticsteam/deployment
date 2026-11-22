@@ -1,0 +1,14 @@
+folder:
+- Lighting
+alias: 'Match end: stage lights back to idle'
+enabled: false
+trigger_yaml: |
+  - platform: state
+    entity_id: vex_tm.main
+    event_type: matchStopped
+condition_yaml: null
+action_yaml: |
+  - service: zeros.set_preset
+    target: zeros.main
+    data:
+      preset_name: Idle

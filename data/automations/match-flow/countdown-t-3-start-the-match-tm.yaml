@@ -1,0 +1,12 @@
+folder:
+- Match flow
+alias: 'Countdown T-3: start the match (TM)'
+enabled: true
+trigger_yaml: |
+  - platform: timer_milestone
+    tag: fieldCountdown
+    remaining: 00:00:03
+condition_yaml: ''
+action_yaml: |
+  - service: vex_tm.start_match
+    target: vex_tm.main

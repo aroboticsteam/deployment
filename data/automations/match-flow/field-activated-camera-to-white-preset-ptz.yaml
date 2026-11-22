@@ -1,0 +1,14 @@
+folder:
+- Match flow
+alias: 'Field activated: camera to white preset (PTZ)'
+enabled: true
+trigger_yaml: |
+  - platform: state
+    entity_id: vex_tm.main
+    event_type: fieldActivated
+condition_yaml: ''
+action_yaml: |
+  - service: ptz.recall_preset
+    target: ptz.birddog
+    data:
+      preset: "{{ (trigger.payload.fieldID | int) - 1 }}"

@@ -1,0 +1,14 @@
+folder:
+- Match flow
+alias: 'Match start: start the recording'
+enabled: true
+trigger_yaml: |
+  - platform: state
+    event_type: audienceDisplayChanged
+condition_yaml: |
+  - "{{ trigger.payload.display == 'IN_MATCH' }}"
+action_yaml: |
+  - service: capture.start_recording
+    target: capture.main
+    data:
+      field_id: "{{ states('vex_tm.main', 'current_field') }}"

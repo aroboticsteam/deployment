@@ -1,0 +1,15 @@
+folder:
+- Match flow
+alias: 'Countdown T-3: strip goes red'
+enabled: false
+trigger_yaml: |
+  - platform: timer_milestone
+    tag: fieldCountdown
+    remaining: 00:00:03
+condition_yaml: null
+action_yaml: |
+  - service: wled.set_preset
+    target_tag: fieldLights
+    target_filter: '{{ trigger.entity.tags | intersect(target.tags) | length > 0 }}'
+    data:
+      preset: 4
