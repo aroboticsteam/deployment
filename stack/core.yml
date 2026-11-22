@@ -1,9 +1,9 @@
 # Core: secrets, Postgres, Redis, Garage (S3), migrations and the app.
 # Part of compose.stack.yml (see its header for configuration).
 
-x-app-image: &app-image ${TMTOOLS_IMAGE:-ghcr.io/aroboticsteam/vex-tm-tools:backend}
+x-app-image: &app-image ${TMTOOLS_IMAGE:-ghcr.io/aroboticsteam/tmtools:backend}
 
-x-frontend-image: &frontend-image ${FRONTEND_IMAGE:-ghcr.io/aroboticsteam/vex-tm-tools:frontend}
+x-frontend-image: &frontend-image ${FRONTEND_IMAGE:-ghcr.io/aroboticsteam/tmtools:frontend}
 
 x-app-env: &app-env
   POSTGRES_DSN: postgresql+asyncpg://tmtools:tmtools@postgres:5432/tmtools
