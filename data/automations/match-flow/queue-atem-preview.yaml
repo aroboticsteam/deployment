@@ -1,0 +1,14 @@
+folder:
+- Match flow
+alias: 'Queue: ATEM preview'
+enabled: false
+trigger_yaml: |
+  - platform: state
+    entity_id: vex_tm.main
+    event_type: fieldMatchAssigned
+condition_yaml: null
+action_yaml: |
+  - service: atem.set_preview
+    target: atem.main
+    data:
+      input_index: '{{ {1: 1, 2: 2, 3: 3}[trigger.payload.fieldID | int] }}'

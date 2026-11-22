@@ -1,0 +1,15 @@
+folder:
+- Match flow
+alias: 'Countdown starts: strip goes amber'
+enabled: false
+trigger_yaml: |
+  - platform: state
+    event_type: timer_started
+    tag: fieldCountdown
+condition_yaml: null
+action_yaml: |
+  - service: wled.set_preset
+    target_tag: fieldLights
+    target_filter: '{{ trigger.entity.tags | intersect(target.tags) | length > 0 }}'
+    data:
+      preset: 3

@@ -1,0 +1,12 @@
+folder:
+- Match flow
+alias: 'Match end: stop the recording'
+enabled: true
+trigger_yaml: |
+  - platform: state
+    entity_id: vex_tm.main
+    event_type: matchStopped
+condition_yaml: null
+action_yaml: |
+  - service: capture.stop_recording
+    target: capture.main

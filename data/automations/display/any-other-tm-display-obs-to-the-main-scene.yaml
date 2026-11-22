@@ -1,0 +1,16 @@
+folder:
+- Display
+alias: 'Any other TM display: OBS to the main scene'
+enabled: false
+trigger_yaml: |
+  - platform: state
+    entity_id: vex_tm.main
+    event_type: audienceDisplayChanged
+condition_yaml: |
+  - '{{ trigger.payload.display not in [''RESULTS'', ''MATCH_RESULTS'', ''IN_MATCH'']
+    }}'
+action_yaml: |
+  - service: obs.switch_scene
+    target: obs.main
+    data:
+      scene_name: Main

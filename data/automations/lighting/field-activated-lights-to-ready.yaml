@@ -1,0 +1,14 @@
+folder:
+- Lighting
+alias: 'Field activated: lights to Ready'
+enabled: true
+trigger_yaml: |
+  - platform: state
+    entity_id: vex_tm.main
+    event_type: fieldActivated
+condition_yaml: null
+action_yaml: |
+  - service: zeros.set_preset
+    target: zeros.main
+    data:
+      preset_name: "Field {{ trigger.payload.fieldID }} Ready"

@@ -1,0 +1,15 @@
+folder:
+- Lighting
+alias: 'Audience display IN_MATCH: lights to Countdown'
+enabled: true
+trigger_yaml: |
+  - platform: state
+    entity_id: vex_tm.main
+    event_type: audienceDisplayChanged
+condition_yaml: |
+  - "{{ trigger.payload.display == 'IN_MATCH' }}"
+action_yaml: |
+  - service: zeros.set_preset
+    target: zeros.main
+    data:
+      preset_name: "Field {{ states('vex_tm.main', 'current_field') }} Countdown"

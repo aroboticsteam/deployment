@@ -1,0 +1,17 @@
+folder:
+- Health
+alias: Alert when an integration drops
+enabled: false
+trigger_yaml: |
+  - platform: state
+    event_type: integration_status
+condition_yaml: |
+  - '{{ trigger.payload.status != ''CONNECTED'' }}'
+action_yaml: |
+  - http:
+      url: https://ntfy.sh/TODO_TOPIC
+      method: POST
+      json:
+        topic: TODO_TOPIC
+        title: Integration problem
+        message: '{{ trigger.entity_id }} is {{ trigger.payload.status }}'

@@ -43,3 +43,20 @@ the comments at the top of each file in `stack/`. `REMOTE_APP_HOST` has an `exam
 so set it in `.env` if you route the app on an extra hostname.
 
 Never commit a real `.env`, domain or organisation name.
+
+## Automations as files
+
+Automations, scripts and button pages live in Postgres at runtime. `data/` holds a reviewable copy,
+one YAML file per item, and `tools/automation-sync/sync.py` moves it either way through the REST API
+using an API key (`TMTOOLS_API_KEY` or `~/.config/tmtools/api-key`):
+
+```bash
+pip install -r tools/automation-sync/requirements.txt
+export TMTOOLS_URL=https://<your-app-host>
+python3 tools/automation-sync/sync.py export            # DB -> data/, then git diff / commit
+python3 tools/automation-sync/sync.py import --dry-run  # files -> DB (add --prune to delete extras)
+```
+
+Folders are matched by name path, not id; `last_triggered_at` never round-trips. There is no automatic
+two-way sync: export overwrites the files, import overwrites the server. This is the seed/restore path
+instead of editing the database by hand. Tests: `python3 -m unittest discover tools/automation-sync`.

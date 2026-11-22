@@ -1,0 +1,19 @@
+folder:
+- Finals
+alias: 'Finals: a song for each match'
+enabled: false
+trigger_yaml: |
+  - platform: timer_milestone
+    tag: fieldCountdown
+    remaining: 00:00:10
+condition_yaml: |
+  - '{{ (states(''vex_tm.main'', ''last_event'') or {}).get(''matchName'', '''').startswith(''F'')
+    }}'
+action_yaml: |
+  - service: spotify.play_track
+    target: spotify.avi_mac
+    data:
+      track_uri: '{{ {''F1'': ''spotify:track:TODO_F1'', ''F2'': ''spotify:track:TODO_F2''}.get((states(''vex_tm.main'',
+        ''last_event'') or {}).get(''matchName'', ''''), ''spotify:track:TODO_MATCH_TRACK'')
+        }}'
+      start_time_s: 0

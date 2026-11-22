@@ -1,0 +1,26 @@
+folder:
+- Match flow
+alias: 'Match end: fade the music out'
+enabled: false
+trigger_yaml: |
+  - platform: state
+    entity_id: vex_tm.main
+    event_type: matchStopped
+condition_yaml: null
+action_yaml: |
+  - service: spotify.set_volume
+    target: spotify.avi_mac
+    data:
+      volume: 50
+  - delay: 00:00:01
+  - service: spotify.set_volume
+    target: spotify.avi_mac
+    data:
+      volume: 20
+  - delay: 00:00:01
+  - service: spotify.pause
+    target: spotify.avi_mac
+  - service: spotify.set_volume
+    target: spotify.avi_mac
+    data:
+      volume: 100

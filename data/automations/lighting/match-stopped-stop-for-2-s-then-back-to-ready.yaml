@@ -1,0 +1,19 @@
+folder:
+- Lighting
+alias: 'Match stopped: Stop for 2 s, then back to Ready'
+enabled: true
+trigger_yaml: |
+  - platform: state
+    entity_id: vex_tm.main
+    event_type: matchStopped
+condition_yaml: null
+action_yaml: |
+  - service: zeros.set_preset
+    target: zeros.main
+    data:
+      preset_name: "Field {{ states('vex_tm.main', 'current_field') }} Stop"
+  - delay: "00:00:02"
+  - service: zeros.set_preset
+    target: zeros.main
+    data:
+      preset_name: "Field {{ states('vex_tm.main', 'current_field') }} Ready"
