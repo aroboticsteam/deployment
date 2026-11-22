@@ -33,7 +33,7 @@
 #
 # Optional overrides via shell env or a `.env` / `--env-file`:
 #   BASE_DOMAIN            see above. A hostname, not an IP (Authelia cookies).
-#   TMTOOLS_IMAGE          app image (default ghcr.io/aroboticsteam/vex-tm-tools:backend)
+#   TMTOOLS_IMAGE          app image (default ghcr.io/aroboticsteam/tmtools:backend)
 #   ADMIN_LOCAL_PASSWORD   fixed admin password instead of a generated one
 #                          (only read on the very first start). Same password
 #                          for /admin_login, the LLDAP/Authelia user `admin`.
@@ -53,7 +53,7 @@
 #                          that takes over within ~30 s if the leader dies)
 #   APP_WORKERS            `app-worker` containers (default 2; `--profile scale`): they serve requests and
 #                          never lead. FRONTEND_IMAGE = the static nginx image for the 2 `frontend`
-#                          containers of that profile (default ghcr.io/aroboticsteam/vex-tm-tools:frontend;
+#                          containers of that profile (default ghcr.io/aroboticsteam/tmtools:frontend;
 #                          deploy it from the same build as TMTOOLS_IMAGE). HAPROXY_IMAGE = haproxy:3.0-alpine.
 #   LIGHTING_IMAGE         default ghcr.io/aroboticsteam/lightpoint:latest
 #   LIGHTING_CONFIG_DIR    host dir with fixtures.json for `--profile lighting`,

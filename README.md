@@ -1,6 +1,6 @@
 # deployment
 
-Runtime and deployment configuration for [`vex-tm-tools`](https://github.com/aroboticsteam/vex-tm-tools)
+Runtime and deployment configuration for [`tmtools`](https://github.com/aroboticsteam/tmtools)
 (TMTools, the VEX tournament-management tool). The application repo builds and publishes images;
 this repo describes how to run them in a real environment. Nothing here builds from source.
 
@@ -17,15 +17,15 @@ this repo describes how to run them in a real environment. Nothing here builds f
 
 Images come from the application repo's CI (`docker-publish.yml`):
 
-- `ghcr.io/aroboticsteam/vex-tm-tools:backend`
-- `ghcr.io/aroboticsteam/vex-tm-tools:frontend`
+- `ghcr.io/aroboticsteam/tmtools:backend`
+- `ghcr.io/aroboticsteam/tmtools:frontend`
 - also `<sha>-<component>` and `<version>-<component>` tags.
 
 Override them in `.env` to pin a release or test a custom build:
 
 ```bash
-TMTOOLS_IMAGE=ghcr.io/aroboticsteam/vex-tm-tools:<tag>-backend
-FRONTEND_IMAGE=ghcr.io/aroboticsteam/vex-tm-tools:<tag>-frontend
+TMTOOLS_IMAGE=ghcr.io/aroboticsteam/tmtools:<tag>-backend
+FRONTEND_IMAGE=ghcr.io/aroboticsteam/tmtools:<tag>-frontend
 ```
 
 To test local source, build in the app repo (`docker build -t tmtools-backend:dev .`) and set
