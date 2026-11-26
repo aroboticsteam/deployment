@@ -207,8 +207,8 @@ services:
 
   # ── Scale-out (`--profile scale`): more app containers and static frontends ─────────────────────
   # `app-worker` containers behind HAProxy (workers: they never contend for the leader lock) serve REST and
-  # the public site and send commands to the leader over the Redis command bus. Two static `frontend`
-  # containers (nginx) serve /assets so Python does not spend CPU on files.
+  # the public site and send commands to the leader over the Redis command bus. The two static `frontend`
+  # containers (nginx, not in the profile) serve /assets so Python does not spend CPU on files.
   # Worker containers: LEADER_ELIGIBLE=false, they never contend for the leader lock. APP_WORKERS of them
   # (default 2) run behind HAProxy next to the leader-eligible `app` containers (APP_REPLICAS, default 1;
   # set it to 2 on the event server so a dead leader is replaced within ~30 s).
@@ -220,9 +220,9 @@ services:
       <<: *app-env
       LEADER_ELIGIBLE: "false"
 
+  # Always on: Traefik routes /assets/ (the SPA's hashed JS/CSS) here, so without them the UI is a white screen.
   frontend-1: &frontend
     image: *frontend-image
-    profiles: [scale]
     healthcheck:
       test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/index.html"]
       interval: 10s

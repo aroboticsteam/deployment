@@ -53,7 +53,7 @@
 #                          that takes over within ~30 s if the leader dies)
 #   APP_WORKERS            `app-worker` containers (default 2; `--profile scale`): they serve requests and
 #                          never lead. FRONTEND_IMAGE = the static nginx image for the 2 `frontend`
-#                          containers of that profile (default ghcr.io/aroboticsteam/tmtools:frontend;
+#                          containers, which always run: Traefik serves /assets/ from them (default ghcr.io/aroboticsteam/tmtools:frontend;
 #                          deploy it from the same build as TMTOOLS_IMAGE). HAPROXY_IMAGE = haproxy:3.0-alpine.
 #   LIGHTING_IMAGE         default ghcr.io/aroboticsteam/lightpoint:latest
 #   LIGHTING_CONFIG_DIR    host dir with fixtures.json for `--profile lighting`,
